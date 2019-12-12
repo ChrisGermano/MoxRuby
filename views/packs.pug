@@ -1,0 +1,73 @@
+extends layout
+
+block card-contents
+  form(action="/pack-builder" method="post")
+    div.input.packBuilderInput
+      span.label Edition
+      select(name="cardList")
+        option(value="Alliances") Alliances
+        option(value="Antiquities") Antiquities
+        option(value="Arabian Nights") Arabian Nights
+        option(value="Chronicles") Chronicles
+        option(value="Coldsnap") Coldsnap
+        option(value="Fallen Empires") Fallen Empires
+        option(value="Homelands") Homelands
+        option(value="Ice Age") Ice Age
+        option(value="Legends") Legends
+        option(value="Revised") Revised
+        option(value="Scryings") Scryings
+        option(value="The Dark") The Dark
+        option(value="Unlimited") Unlimited
+    div.input.packBuilderInput
+      span.label Cards Per Pack
+      select(name="packSize")
+        option(value="8") 8
+        option(value="12") 12
+        option(value="15" selected) 15
+    div.input.packBuilderInput
+      span.label Number of Packs (1 - 36)
+      input(type="number" max="36" min="1" required="true" name="numPacks")
+    div.input.packBuilderInput#landPack
+      span.label Land Pack
+      input(type="checkbox" value="true" name="landPack")
+    div.input.packBuilderInput#cheapCards
+      span.label Cheap Card Mode
+      input(type="checkbox" value="true" name="cheapSkate")
+    div.actions
+      input#submit(type="submit", value="Submit")
+  p (Cheap Card Mode only generates packs containing cards valued at under $100)
+  p (Land Packs only work with 15-card packs)
+
+  script.
+    function downloadPacks(type) {
+
+      let content = '';
+
+      if (type === "csv") {
+        content = "#{packsCSV}";
+      } else if (type === "json") {
+        content = "#{packsJSON}".replace(/&quot;/g, '\"');
+      }
+
+      if (content != null && content != '') {
+        var encodedUri = encodeURI(content);
+        var link = document.createElement("a");
+        link.setAttribute('href', 'data:attachment/text,' + encodedUri);
+        link.setAttribute("download", "packData_" + type + ".txt");
+        document.body.appendChild(link);
+        link.click();
+      }
+
+    }
+
+  div.row.packListTable
+    if packs.length > 0
+      a.downloadLink#csvDownload(href='javascript:void(0);' onclick='downloadPacks("csv");') Download as CSV
+      a.downloadLink#jsonDownload(href='javascript:void(0);' onclick='downloadPacks("json");') Download as JSON
+    each pack in packs
+      div.col-md-4.col-12
+        ul
+          li Pack
+            ul
+              each card in pack
+                li #{card}

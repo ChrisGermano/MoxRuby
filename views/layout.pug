@@ -1,0 +1,47 @@
+block variables
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    title #{title}
+    link(rel="stylesheet" type="text/css" href="/bootstrap.min.css")
+    link(rel="stylesheet" type="text/css" href="/pixel.css")
+    link(rel="stylesheet" type="text/css" href="/custom.css")
+  body
+    div#container-fluid
+      div.col-12.col-md-6.offset-md-3.mb-4.mb-lg-5.mainWindow
+        nav.navbar.navbar-expand-lg.navbar-dark.justify-content-between.mb-3.mainWindow__navBar
+          ul.navbar-nav.navbar-nav-hover.flex-row.align-items-center
+            li.nav-item
+              a.nav-link(href="/" role="button")
+                span.nav-link-inner-text Home
+            li.nav-item
+              a.nav-link(href="/old-school-precons" role="button")
+                span.nav-link-inner-text Old Shool Precons
+            li.nav-item
+              a.nav-link(href="/pack-builder" role="button")
+                span.nav-link-inner-text Pack Builder
+            li.nav-item
+              a.nav-link(href="/pack-images" role="button")
+                span.nav-link-inner-text Pack Images
+            li.nav-item
+              a.nav-link(href="/rotisserie-draft" role="button")
+                span.nav-link-inner-text Rotisserie Draft
+            li.nav-item
+              a.nav-link(href="/os-mtg-links" role="button")
+                span.nav-link-inner-text OS MtG Links
+          div.time.text-center
+            span .time.text-uppercase.text-white 00:00 PM
+
+        div.card.card-tertiary
+          div.card-header.text-center
+            span.icon.icon-xs.w95-window-empty
+            span Mox Ruby
+          div.card-body
+            block card-contents
+            p.card-text.footerText Site built by #[a(href="https://bigboys.nyc") Big Boys NYC]
+
+    script(type="text/javascript" src="/jquery.min.js")
+    script(type="text/javascript" src="/bootstrap.min.js")
+    script(type="text/javascript" src="/pixel.js")

@@ -1,0 +1,52 @@
+body {
+  background-color: #008081 !important;
+}
+
+.mainWindow__navBar {
+  margin-top: 10vh;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.underConstruction {
+  margin: 15px;
+}
+
+.footerText {
+  font-size: 0.5em;
+  margin-top: 25px;
+}
+
+.packBuilderInput, #submit {
+  margin: 15px;
+}
+
+.packBuilderInput .label {
+  margin-right: 15px;
+}
+
+.packListTable {
+  font-size: 0.6em;
+  margin: 15px;
+  text-align: left;
+  width: 100%;
+}
+
+.packListTable td {
+  padding: 5px;
+}
+
+.boosterImage {
+  margin: 15px;
+  max-height: 300px;
+}
+
+@media(max-width: 668px) {
+
+  .mainWindow__navBar {
+    margin-top: 50px;
+  }
+
+}
