@@ -50,3 +50,23 @@ body {
   }
 
 }
+
+@media(max-width: 668px) {
+
+  .navbar {
+    height: auto;
+  }
+
+  .navbar-nav {
+    flex-flow: row wrap;
+  }
+
+  .navbar li.nav-item {
+    flex: 1 0 calc(30.333%);
+  }
+
+  .time.text-center {
+    margin-top: 10px;
+  }
+
+}

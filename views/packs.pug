@@ -35,8 +35,9 @@ block card-contents
       input(type="checkbox" value="true" name="cheapSkate")
     div.actions
       input#submit(type="submit", value="Submit")
-  p (Cheap Card Mode only generates packs containing cards valued at under $100)
-  p (Land Packs only work with 15-card packs)
+  p Cheap Card Mode only generates packs containing cards valued at under $100.
+  p Beta Feature - Land Packs only work with 15 card packs.
+  p Land Packs replace a common card with "Basic Land", replicating older sets that included basic lands on the common sheet.
 
   script.
     function downloadPacks(type) {
@@ -50,10 +51,10 @@ block card-contents
       }
 
       if (content != null && content != '') {
-        var encodedUri = encodeURI(content);
+        var encodedUri = "text/"+ type +";charset=utf-8," + encodeURI(content);
         var link = document.createElement("a");
-        link.setAttribute('href', 'data:attachment/text,' + encodedUri);
-        link.setAttribute("download", "packData_" + type + ".txt");
+        link.setAttribute('href', "data:" + encodedUri);
+        link.setAttribute("download", "packData_" + type + "." + type);
         document.body.appendChild(link);
         link.click();
       }
