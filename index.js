@@ -36,7 +36,6 @@ app.get("/pack-builder", (req, res) => {
 });
 
 app.post("/pack-builder", (req, res) => {
-    console.log(req.body);
     const options = {
         method: 'POST',
         uri: storedConfig.config.apiUrl,
@@ -74,7 +73,15 @@ app.post("/pack-builder", (req, res) => {
         }
 
         packsCSV += card.name + ",";
-        packsJSON += "\u0022" + card.name + "\u0022,";
+        if (card != null && card["flavor_text"]) {
+          card.flavor_text = card.flavor_text.replace(/"/g,"");
+        }
+
+        if (card != null && card["oracle_text"]) {
+          card.oracle_text = card.oracle_text.replace(/(\r\n|\n|\r)/gm," ");
+        }
+
+        packsJSON += JSON.stringify(card) + ",";
         cardNames[packIndex].push(card.name);
         index++;
       });
