@@ -1,7 +1,7 @@
 extends layout
 
 block card-contents
-  form(action="/pack-builder" method="post")
+  form.packBuilderForm(action="/pack-builder" method="post")
     div.input.packBuilderInput
       span.label Edition
       select(name="cardList")
@@ -63,10 +63,13 @@ block card-contents
 
   div.row.packListTable
     if packs.length > 0
-      a.downloadLink#csvDownload(href='javascript:void(0);' onclick='downloadPacks("csv");') Download as CSV
-      a.downloadLink#jsonDownload(href='javascript:void(0);' onclick='downloadPacks("json");') Download as JSON
+      div.col-md-4.offset-md-4.col-12.downloadLinkWrapper
+        a.downloadLink#csvDownload(href='javascript:void(0);' onclick='downloadPacks("csv");') Download Card Names as CSV
+        br
+        a.downloadLink#jsonDownload(href='javascript:void(0);' onclick='downloadPacks("json");') Download Full Data as JSON
+      div.col-md-4.col-0
     each pack in packs
-      div.col-md-4.col-12
+      div.col-md-4.col-12.packList
         ul
           li Pack
             ul

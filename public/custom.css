@@ -19,6 +19,18 @@ body {
   margin-top: 25px;
 }
 
+.packBuilderForm {
+  font-size: 14px;
+}
+
+@media (max-width: 668px) {
+
+  .packBuilderForm {
+    font-size: 12px;
+  }
+  
+}
+
 .packBuilderInput, #submit {
   margin: 15px;
 }
@@ -36,6 +48,14 @@ body {
 
 .packListTable td {
   padding: 5px;
+}
+
+@media(max-width: 668px) {
+
+  .packListTable {
+    margin: 0;
+  }
+
 }
 
 .boosterImage {
@@ -69,4 +89,20 @@ body {
     margin-top: 10px;
   }
 
+}
+
+.downloadLinkWrapper {
+  font-size: 12px;
+  line-height: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.packList * {
+  font-size: 10px;
+  list-style: none;
+}
+
+.packList>ul>li {
+  font-weight: 700;
 }
