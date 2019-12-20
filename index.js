@@ -58,7 +58,7 @@ app.post("/pack-builder", (req, res) => {
       let packsCSV = "";
       let packsJSON = "{";
 
-      const fields = ['id', 'tcgplayer_id', 'name', 'released_at', 'mana_cost', 'cmc', 'type_line', 'oracle_text', 'colors', 'reserved', 'set', 'set_name', 'set_type', 'scryfall_set_uri', 'rulings_uri', 'collector_number', 'rarity', 'artist', 'flavor_text', 'picURL', 'colorIdentity', 'gatherer', 'affiliate', 'rulings', 'cheapSkate', 'cardNum', 'packID', 'cardOrder', 'power', 'toughness'];
+      const fields = ['id', 'tcgplayer_id', 'name', 'released_at', 'mana_cost', 'cmc', 'type_line', 'oracle_text', 'colors', 'reserved', 'set', 'set_name', 'set_type', 'scryfall_set_uri', 'rulings_uri', 'collector_number', 'rarity', 'artist', 'picURL', 'colorIdentity', 'gatherer', 'affiliate', 'cheapSkate', 'cardNum', 'packID', 'cardOrder', 'power', 'toughness'];
 
       fields.forEach(function(col) {
         packsCSV += col + ",";
@@ -78,14 +78,12 @@ app.post("/pack-builder", (req, res) => {
           packsJSON += "\u0022pack_" + packIndex + "\u0022: [";
         }
 
-        card.flavor_text = "*";
-        //card.flavor_text = card.flavor_text.replace(/"/g,"").replace(/(\r\n|\n|\r)/gm," ");
+        // TODO enable these later one once parsing is fixed
+        delete card.flavor_text;
+        delete card.rulings;
 
-        card.oracle_text = "*";
-        //card.oracle_text = card.oracle_text.replace(/"/g,"").replace(/(\r\n|\n|\r)/gm,"");
-
-        card.rulings = "*";
-        //card.rulings = card.rulings.replace(/"/g,"").replace(/(\r\n|\n|\r)/gm,"");
+        card.oracle_text = card.oracle_text.replace(/"|,/g,"").replace(/(\r\n|\n|\r)/gm,"");
+        card.affiliate = card.affiliate.replace(/&/g,"AMPERSAND");
 
         card.toughness = card.toughness;
 
@@ -95,21 +93,11 @@ app.post("/pack-builder", (req, res) => {
 
         packsCSV = packsCSV.substring(0, packsCSV.length - 1) + "newline"
 
-        /*
-        try {
-          const parser = new Parser(opts);
-          packsCSV += parser.parse(card) + "\u2029";
-        } catch (err) {
-          (err);
-        }
-        */
-
         packsJSON += JSON.stringify(card) + ",";
         cardNames[packIndex].push(card.name);
         index++;
       });
 
-      ///packsCSV = packsCSV.substring(0, packsCSV.length - 1).replace(/"/g, "").replace(/(\r\n|\n|\r)/gm,"|||");
       packsJSON = packsJSON.substring(0, packsJSON.length - 1);
       packsJSON += "]}";
 

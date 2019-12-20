@@ -45,9 +45,9 @@ block card-contents
       let content = '';
 
       if (type === "csv") {
-        content = "#{packsCSV}".replace(/newline/g, "\r\n");
+        content = "#{packsCSV}".replace(/AMPERSAND/g,"&").replace(/newline/g, "\r\n");
       } else if (type === "json") {
-        content = "#{packsJSON}";
+        content = "#{packsJSON}".replace(/AMPERSAND/g,"&").replace(/&quot;/g,"\"");
       }
 
       if (content != null && content != '') {
